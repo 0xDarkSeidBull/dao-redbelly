@@ -105,7 +105,7 @@ export function useBridgeTransfers() {
         });
 
         const approvals = Number(approvalCount);
-        let mintTx = transfer.mintTx;
+        let mintTx: string | undefined = transfer.mintTx;
 
         if (executed && !mintTx) {
           try {
@@ -120,7 +120,7 @@ export function useBridgeTransfers() {
               fromBlock,
               toBlock: "latest",
             });
-            mintTx = logs[0]?.transactionHash;
+            mintTx = (logs as Array<{ transactionHash?: string }>)[0]?.transactionHash;
           } catch {
             /* explorer/RPC may not support wide log ranges */
           }
@@ -140,7 +140,12 @@ export function useBridgeTransfers() {
           mintTx !== transfer.mintTx ||
           status !== transfer.status
         ) {
-          updateTransfer(transfer.id, { approvals, executed, mintTx, status });
+          updateTransfer(transfer.id, {
+            approvals,
+            executed,
+            ...(mintTx ? { mintTx } : {}),
+            status,
+          });
         }
       } catch {
         /* transient RPC failure — retry on the next tick */
