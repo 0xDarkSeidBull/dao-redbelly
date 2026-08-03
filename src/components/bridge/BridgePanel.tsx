@@ -262,7 +262,7 @@ export function BridgePanel({
               placeholder="0.0"
               value={amount}
               onChange={(event) => setAmount(event.target.value)}
-              className="h-12 pr-16 text-base"
+              className="h-12 border-input bg-background pr-16 text-base placeholder:text-muted-foreground focus-visible:border-accent"
             />
             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-muted-foreground">
               ETH
@@ -272,7 +272,7 @@ export function BridgePanel({
         </div>
 
         <div className="flex justify-center">
-          <span className="flex size-9 items-center justify-center rounded-md border border-border bg-secondary">
+          <span className="flex size-9 items-center justify-center rounded-full border border-border bg-card">
             <ArrowDown className="size-4 text-muted-foreground" />
           </span>
         </div>
