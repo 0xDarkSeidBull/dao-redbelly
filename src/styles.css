@@ -61,6 +61,9 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --color-accent-soft: var(--accent-soft);
   --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-surface-inset: var(--surface-inset);
   --font-sans: "Readex Pro", ui-sans-serif, system-ui, sans-serif;
 }
 
