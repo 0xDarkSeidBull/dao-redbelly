@@ -287,7 +287,7 @@ export function BridgePanel({
               setRecipientTouched(true);
               setRecipient(event.target.value);
             }}
-            className="h-12 font-mono text-sm"
+            className="h-12 border-input bg-background font-mono text-sm placeholder:text-muted-foreground focus-visible:border-accent"
           />
           {recipientError ? (
             <p className="text-sm text-accent">{recipientError}</p>
