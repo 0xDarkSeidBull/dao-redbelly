@@ -136,4 +136,35 @@
   button {
     font-weight: 500;
   }
+
+  /* Fixed, very subtle network texture behind all content */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 50% -10%, oklch(0.6763 0.2115 24.81 / 5%), transparent 60%),
+      radial-gradient(circle, oklch(1 0 0 / 7%) 1px, transparent 1.2px),
+      repeating-linear-gradient(
+        135deg,
+        oklch(1 0 0 / 3.5%) 0px,
+        oklch(1 0 0 / 3.5%) 1px,
+        transparent 1px,
+        transparent 64px
+      );
+    background-size: 100% 100%, 48px 48px, 100% 100%;
+  }
+
+  #root,
+  body > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@utility inset-panel {
+  background-color: var(--surface-inset);
+  border: 1px solid var(--border);
 }
