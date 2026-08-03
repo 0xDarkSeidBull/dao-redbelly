@@ -228,13 +228,13 @@ export function BridgePanel({
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-lg border border-border px-4 py-3">
+          <div className="rounded-lg border border-border bg-background px-4 py-3">
             <p className="text-xs uppercase tracking-wide text-muted-foreground">Sepolia ETH</p>
             <p className="mt-1 text-lg font-medium text-foreground">
               {ethBalance !== undefined ? `${Number(formatEther(ethBalance)).toFixed(5)} ETH` : "—"}
             </p>
           </div>
-          <div className="rounded-lg border border-border px-4 py-3">
+          <div className="rounded-lg border border-border bg-background px-4 py-3">
             <p className="text-xs uppercase tracking-wide text-muted-foreground">
               Redbelly WETH.rb
             </p>
