@@ -228,13 +228,13 @@ export function BridgePanel({
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-lg border border-border px-4 py-3">
+          <div className="rounded-lg border border-border bg-background px-4 py-3">
             <p className="text-xs uppercase tracking-wide text-muted-foreground">Sepolia ETH</p>
             <p className="mt-1 text-lg font-medium text-foreground">
               {ethBalance !== undefined ? `${Number(formatEther(ethBalance)).toFixed(5)} ETH` : "—"}
             </p>
           </div>
-          <div className="rounded-lg border border-border px-4 py-3">
+          <div className="rounded-lg border border-border bg-background px-4 py-3">
             <p className="text-xs uppercase tracking-wide text-muted-foreground">
               Redbelly WETH.rb
             </p>
@@ -262,7 +262,7 @@ export function BridgePanel({
               placeholder="0.0"
               value={amount}
               onChange={(event) => setAmount(event.target.value)}
-              className="h-12 pr-16 text-base"
+              className="h-12 border-input bg-background pr-16 text-base placeholder:text-muted-foreground focus-visible:border-accent"
             />
             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-muted-foreground">
               ETH
@@ -272,7 +272,7 @@ export function BridgePanel({
         </div>
 
         <div className="flex justify-center">
-          <span className="flex size-9 items-center justify-center rounded-md border border-border bg-secondary">
+          <span className="flex size-9 items-center justify-center rounded-full border border-border bg-card">
             <ArrowDown className="size-4 text-muted-foreground" />
           </span>
         </div>
@@ -287,7 +287,7 @@ export function BridgePanel({
               setRecipientTouched(true);
               setRecipient(event.target.value);
             }}
-            className="h-12 font-mono text-sm"
+            className="h-12 border-input bg-background font-mono text-sm placeholder:text-muted-foreground focus-visible:border-accent"
           />
           {recipientError ? (
             <p className="text-sm text-accent">{recipientError}</p>

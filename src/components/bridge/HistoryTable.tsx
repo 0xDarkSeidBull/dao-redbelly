@@ -16,10 +16,12 @@ function StatusPill({ transfer }: { transfer: Transfer }) {
 
   const tone =
     transfer.status === "minted"
-      ? "bg-secondary text-success"
+      ? "bg-success/12 text-success"
       : transfer.status === "failed"
-        ? "bg-accent-soft text-accent"
-        : "bg-secondary text-muted-foreground";
+        ? "bg-accent/12 text-accent"
+        : transfer.status === "locking"
+          ? "bg-accent/12 text-accent"
+          : "bg-warning/12 text-warning";
 
   return (
     <span className={`inline-flex rounded-md px-2.5 py-1 text-xs font-medium ${tone}`}>

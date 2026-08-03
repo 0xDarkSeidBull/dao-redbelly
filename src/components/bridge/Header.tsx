@@ -63,10 +63,10 @@ export function Header({
 
 export function WarningBanner() {
   return (
-    <div className="border-b border-border bg-secondary">
+    <div className="border-b border-border bg-accent/8">
       <div className="mx-auto flex max-w-5xl items-start gap-3 px-6 py-3">
-        <AlertTriangle className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-        <p className="text-sm leading-relaxed text-muted-foreground">
+        <AlertTriangle className="mt-0.5 size-4 shrink-0 text-accent" />
+        <p className="text-sm leading-relaxed text-warning-foreground">
           <span className="font-medium text-foreground">This is a testnet demo.</span> Do not send
           real funds. ETH locked on Sepolia is only recoverable by the contract owner via emergency
           withdrawal — there is no user-initiated unlock.
