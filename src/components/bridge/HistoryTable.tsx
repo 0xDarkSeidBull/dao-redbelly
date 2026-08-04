@@ -88,8 +88,9 @@ export function HistoryTable() {
                         href={redbellyTxUrl(row.mint.redbellyTxHash)}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1 font-medium text-accent hover:underline"
+                        className="inline-flex items-center gap-1.5 font-medium text-accent hover:underline"
                       >
+                        <img src={wethRbLogo} alt="" className="size-4 object-contain" />
                         {shorten(row.mint.redbellyTxHash)}
                         <ExternalLink className="size-3.5" />
                       </a>
