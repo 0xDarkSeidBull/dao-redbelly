@@ -263,13 +263,34 @@ export function BridgePanel({
               inputMode="decimal"
               placeholder="0.0"
               value={amount}
-              onChange={(event) => setAmount(event.target.value)}
-              className="h-12 border-input bg-background pr-16 text-base placeholder:text-muted-foreground focus-visible:border-accent"
+              onChange={(event) => {
+                const next = event.target.value;
+                if (next === "" || /^\d*\.?\d*$/.test(next)) setAmount(next);
+              }}
+              className="h-12 border-input bg-background pr-20 text-base placeholder:text-muted-foreground focus-visible:border-accent"
             />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-muted-foreground">
+            <span className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center gap-1.5 text-sm font-medium text-muted-foreground">
+              <img src={ethLogo} alt="" className="size-4 object-contain" />
               ETH
             </span>
           </div>
+          {sliderRange ? (
+            <div className="space-y-1 pt-1">
+              <Slider
+                value={[sliderValue]}
+                min={sliderRange.min}
+                max={sliderRange.max}
+                step={sliderRange.step}
+                onValueChange={([next]) => {
+                  if (next !== undefined) setAmount(String(Number(next.toFixed(6))));
+                }}
+              />
+              <div className="flex justify-between text-xs text-muted-foreground">
+                <span>{sliderRange.min} ETH</span>
+                <span>{sliderRange.max} ETH</span>
+              </div>
+            </div>
+          ) : null}
           {amountError ? <p className="text-sm text-accent">{amountError}</p> : null}
         </div>
 
