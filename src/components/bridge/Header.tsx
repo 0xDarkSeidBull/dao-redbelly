@@ -32,7 +32,7 @@ export function Header({
           <img
             src={redbridgeLogo.url}
             alt="Redbridge"
-            className="h-9 w-auto object-contain"
+            className="h-14 w-auto object-contain"
           />
           <div>
             <p className="text-base font-medium leading-tight text-foreground">Redbridge</p>
