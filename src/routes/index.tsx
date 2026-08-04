@@ -10,13 +10,13 @@ import { LOCK_VAULT_ADDRESS, WETH_RB_ADDRESS, shorten } from "@/lib/bridge";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Redbridge, Sepolia ETH to Redbelly WETH.rb" },
+      { title: "Redbridge" },
       {
         name: "description",
         content:
           "Lock ETH on Ethereum Sepolia and receive wrapped WETH.rb 1:1 on Redbelly Testnet through a 2-of-3 relayer bridge.",
       },
-      { property: "og:title", content: "Redbridge, Sepolia ETH to Redbelly WETH.rb" },
+      { property: "og:title", content: "Redbridge" },
       {
         property: "og:description",
         content:

@@ -2,7 +2,7 @@ import { AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ethLogo from "@/assets/eth-logo.png";
 import wethRbLogo from "@/assets/wethrb-logo.png";
-import redbridgeLogo from "@/assets/redbridgelogo.png.asset.json";
+
 import { REDBELLY_CHAIN_ID, SEPOLIA_CHAIN_ID, shorten } from "@/lib/bridge";
 
 const chainLabel = (chainId?: number) => {
@@ -30,9 +30,9 @@ export function Header({
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-5">
         <div className="flex items-center gap-3">
           <img
-            src={redbridgeLogo.url}
-            alt="Redbridge"
-            className="h-14 w-auto object-contain"
+            src="/rblogo.png"
+            alt="Redbridge logo"
+            className="h-8 w-auto shrink-0 object-contain sm:h-11"
           />
           <div>
             <p className="text-base font-medium leading-tight text-foreground">Redbridge</p>
