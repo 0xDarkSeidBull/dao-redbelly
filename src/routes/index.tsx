@@ -63,27 +63,40 @@ function BridgePage() {
 
         <HistoryTable />
 
-        <footer className="grid gap-2 border-t border-border pt-6 text-xs text-muted-foreground sm:grid-cols-2">
-          <p>
-            SepoliaLockVault ·{" "}
+        <footer className="space-y-3 border-t border-border pt-6 text-xs text-muted-foreground">
+          <div className="grid gap-2 sm:grid-cols-2">
+            <p>
+              SepoliaLockVault ·{" "}
+              <a
+                href={`https://sepolia.etherscan.io/address/${LOCK_VAULT_ADDRESS}`}
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-accent hover:underline"
+              >
+                {shorten(LOCK_VAULT_ADDRESS, 6)}
+              </a>
+            </p>
+            <p className="sm:text-right">
+              WETHBridged ·{" "}
+              <a
+                href={`https://redbelly.testnet.routescan.io/token/${WETH_RB_ADDRESS}?type=erc20`}
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-accent hover:underline"
+              >
+                {shorten(WETH_RB_ADDRESS, 6)}
+              </a>
+            </p>
+          </div>
+          <p className="text-center">
+            Built with ♥ by{" "}
             <a
-              href={`https://sepolia.etherscan.io/address/${LOCK_VAULT_ADDRESS}`}
+              href="https://github.com/0xDarkSeidBull"
               target="_blank"
               rel="noreferrer"
               className="font-medium text-accent hover:underline"
             >
-              {shorten(LOCK_VAULT_ADDRESS, 6)}
-            </a>
-          </p>
-          <p className="sm:text-right">
-            WETHBridged ·{" "}
-            <a
-              href={`https://redbelly.testnet.routescan.io/token/${WETH_RB_ADDRESS}?type=erc20`}
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium text-accent hover:underline"
-            >
-              {shorten(WETH_RB_ADDRESS, 6)}
+              0xDarkSeidBull
             </a>
           </p>
         </footer>
