@@ -1,27 +1,14 @@
 import { ExternalLink } from "lucide-react";
 import { formatEther } from "viem";
 import { Card } from "@/components/ui/card";
-import type { Transfer } from "@/hooks/useBridgeTransfers";
+import { useBridgeHistory, type BridgeHistoryRow } from "@/hooks/useBridgeHistory";
 import { redbellyTxUrl, sepoliaTxUrl, shorten } from "@/lib/bridge";
 
-function StatusPill({ transfer }: { transfer: Transfer }) {
-  const label =
-    transfer.status === "minted"
-      ? "Minted"
-      : transfer.status === "failed"
-        ? "Failed"
-        : transfer.status === "locking"
-          ? "Locking"
-          : `${transfer.approvals}-of-2 approved`;
-
-  const tone =
-    transfer.status === "minted"
-      ? "bg-success/12 text-success"
-      : transfer.status === "failed"
-        ? "bg-accent/12 text-accent"
-        : transfer.status === "locking"
-          ? "bg-accent/12 text-accent"
-          : "bg-warning/12 text-warning";
+function StatusPill({ row }: { row: BridgeHistoryRow }) {
+  const minted = row.status === "minted" || Boolean(row.mint);
+  const approvals = row.approvals?.length ?? 0;
+  const label = minted ? "Minted" : `${approvals}-of-2 approved`;
+  const tone = minted ? "bg-success/12 text-success" : "bg-warning/12 text-warning";
 
   return (
     <span className={`inline-flex rounded-md px-2.5 py-1 text-xs font-medium ${tone}`}>
@@ -30,36 +17,23 @@ function StatusPill({ transfer }: { transfer: Transfer }) {
   );
 }
 
-export function HistoryTable({
-  transfers,
-  onClear,
-}: {
-  transfers: Transfer[];
-  onClear: () => void;
-}) {
+export function HistoryTable() {
+  const { rows, loading, error } = useBridgeHistory();
+
   return (
     <Card className="border-border p-0 shadow-none">
       <div className="flex items-center justify-between border-b border-border px-6 py-5">
         <div>
           <h2 className="text-base font-medium text-foreground">Bridge history</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Locks initiated from this browser, tracked live against both chains.
+            All bridge transactions, tracked live against both chains.
           </p>
         </div>
-        {transfers.length > 0 ? (
-          <button
-            type="button"
-            onClick={onClear}
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-accent"
-          >
-            Clear
-          </button>
-        ) : null}
       </div>
 
-      {transfers.length === 0 ? (
+      {rows.length === 0 ? (
         <p className="px-6 py-10 text-center text-sm text-muted-foreground">
-          No bridge transfers yet.
+          {loading ? "Loading bridge history…" : (error ?? "No bridge transfers yet.")}
         </p>
       ) : (
         <div className="overflow-x-auto">
@@ -74,45 +48,48 @@ export function HistoryTable({
               </tr>
             </thead>
             <tbody>
-              {transfers.map((transfer) => (
-                <tr key={transfer.id} className="border-b border-border last:border-b-0">
+              {rows.map((row) => (
+                <tr
+                  key={`${row.sourceChainId}-${row.sourceNonce}`}
+                  className="border-b border-border last:border-b-0"
+                >
                   <td className="whitespace-nowrap px-6 py-4 font-medium text-foreground">
-                    {formatEther(BigInt(transfer.amountWei))} ETH
+                    {formatEther(BigInt(row.amountWei))} ETH
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-muted-foreground">
-                    {shorten(transfer.recipient)}
+                    {shorten(row.recipient)}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4">
-                    {transfer.sepoliaTx ? (
+                    {row.sepoliaTxHash ? (
                       <a
-                        href={sepoliaTxUrl(transfer.sepoliaTx)}
+                        href={sepoliaTxUrl(row.sepoliaTxHash)}
                         target="_blank"
                         rel="noreferrer"
                         className="inline-flex items-center gap-1 font-medium text-accent hover:underline"
                       >
-                        {shorten(transfer.sepoliaTx)}
+                        {shorten(row.sepoliaTxHash)}
                         <ExternalLink className="size-3.5" />
                       </a>
                     ) : (
-                      <span className="text-muted-foreground">—</span>
+                      <span className="text-muted-foreground">-</span>
                     )}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4">
-                    <StatusPill transfer={transfer} />
+                    <StatusPill row={row} />
                   </td>
                   <td className="whitespace-nowrap px-6 py-4">
-                    {transfer.mintTx ? (
+                    {row.mint?.redbellyTxHash ? (
                       <a
-                        href={redbellyTxUrl(transfer.mintTx)}
+                        href={redbellyTxUrl(row.mint.redbellyTxHash)}
                         target="_blank"
                         rel="noreferrer"
                         className="inline-flex items-center gap-1 font-medium text-accent hover:underline"
                       >
-                        {shorten(transfer.mintTx)}
+                        {shorten(row.mint.redbellyTxHash)}
                         <ExternalLink className="size-3.5" />
                       </a>
                     ) : (
-                      <span className="text-muted-foreground">—</span>
+                      <span className="text-muted-foreground">-</span>
                     )}
                   </td>
                 </tr>
