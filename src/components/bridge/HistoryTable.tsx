@@ -1,6 +1,8 @@
 import { ExternalLink } from "lucide-react";
 import { formatEther } from "viem";
 import { Card } from "@/components/ui/card";
+import ethLogo from "@/assets/eth-logo.png";
+import wethRbLogo from "@/assets/wethrb-logo.png";
 import { useBridgeHistory, type BridgeHistoryRow } from "@/hooks/useBridgeHistory";
 import { redbellyTxUrl, sepoliaTxUrl, shorten } from "@/lib/bridge";
 
@@ -54,7 +56,10 @@ export function HistoryTable() {
                   className="border-b border-border last:border-b-0"
                 >
                   <td className="whitespace-nowrap px-6 py-4 font-medium text-foreground">
-                    {formatEther(BigInt(row.amountWei))} ETH
+                    <span className="inline-flex items-center gap-2">
+                      <img src={ethLogo} alt="" className="size-4 object-contain" />
+                      {formatEther(BigInt(row.amountWei))} ETH
+                    </span>
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-muted-foreground">
                     {shorten(row.recipient)}
@@ -83,8 +88,9 @@ export function HistoryTable() {
                         href={redbellyTxUrl(row.mint.redbellyTxHash)}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1 font-medium text-accent hover:underline"
+                        className="inline-flex items-center gap-1.5 font-medium text-accent hover:underline"
                       >
+                        <img src={wethRbLogo} alt="" className="size-4 object-contain" />
                         {shorten(row.mint.redbellyTxHash)}
                         <ExternalLink className="size-3.5" />
                       </a>

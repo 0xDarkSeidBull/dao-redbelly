@@ -1,5 +1,7 @@
 import { AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ethLogo from "@/assets/eth-logo.png";
+import wethRbLogo from "@/assets/wethrb-logo.png";
 import { REDBELLY_CHAIN_ID, SEPOLIA_CHAIN_ID, shorten } from "@/lib/bridge";
 
 const chainLabel = (chainId?: number) => {
@@ -26,14 +28,17 @@ export function Header({
     <header className="border-b border-border bg-background">
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-5">
         <div className="flex items-center gap-3">
-          <span className="flex size-9 items-center justify-center rounded-md bg-accent text-sm font-medium text-accent-foreground">
-            RB
-          </span>
           <div>
-            <p className="text-base font-medium leading-tight text-foreground">RB Bridge</p>
-            <p className="text-xs text-muted-foreground">Sepolia ETH → Redbelly WETH.rb</p>
+            <p className="text-base font-medium leading-tight text-foreground">Redbridge</p>
+            <p className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
+              <img src={ethLogo} alt="Ethereum" className="size-4 object-contain" />
+              Sepolia ETH →
+              <img src={wethRbLogo} alt="WETH.rb" className="size-4 object-contain" />
+              Redbelly WETH.rb
+            </p>
           </div>
         </div>
+
 
         <div className="flex items-center gap-3">
           {address ? (

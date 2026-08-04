@@ -78,12 +78,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "RB Bridge" },
+      { title: "Redbridge" },
       {
         name: "description",
         content: "Cross-chain testnet bridge between Ethereum Sepolia and Redbelly Testnet.",
       },
-      { property: "og:title", content: "RB Bridge" },
+      { property: "og:title", content: "Redbridge" },
       {
         property: "og:description",
         content: "Cross-chain testnet bridge between Ethereum Sepolia and Redbelly Testnet.",
