@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
 
 function BridgePage() {
   const wallet = useWallet();
-  const { transfers, addTransfer, updateTransfer, clearHistory } = useBridgeTransfers();
+  const { transfers, addTransfer, updateTransfer } = useBridgeTransfers();
   const activeTransfer = transfers[0];
 
   return (
@@ -61,7 +61,7 @@ function BridgePage() {
 
         <Explainer />
 
-        <HistoryTable transfers={transfers} onClear={clearHistory} />
+        <HistoryTable />
 
         <footer className="grid gap-2 border-t border-border pt-6 text-xs text-muted-foreground sm:grid-cols-2">
           <p>
