@@ -3,6 +3,8 @@ import { ExternalLink } from "lucide-react";
 
 import { formatEther } from "viem";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
 import ethLogo from "@/assets/eth-logo.png";
 import wethRbLogo from "@/assets/wethrb-logo.png";
 import { useBridgeHistory, type BridgeHistoryRow } from "@/hooks/useBridgeHistory";
