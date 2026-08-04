@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { ExternalLink } from "lucide-react";
+
 import { formatEther } from "viem";
 import { Card } from "@/components/ui/card";
 import ethLogo from "@/assets/eth-logo.png";
