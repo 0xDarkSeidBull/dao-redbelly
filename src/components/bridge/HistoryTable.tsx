@@ -112,6 +112,31 @@ export function HistoryTable() {
           </table>
         </div>
       )}
+
+      <div className="flex items-center justify-between gap-4 border-t border-border px-6 py-4">
+        <p className="text-sm text-muted-foreground">
+          Showing {rangeStart}-{rangeEnd} of {total}
+        </p>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={offset === 0}
+            onClick={() => setOffset((prev) => Math.max(0, prev - PAGE_SIZE))}
+          >
+            Previous
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={offset + PAGE_SIZE >= total}
+            onClick={() => setOffset((prev) => prev + PAGE_SIZE)}
+          >
+            Next
+          </Button>
+        </div>
+      </div>
     </Card>
+
   );
 }
