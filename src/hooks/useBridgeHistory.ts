@@ -23,24 +23,32 @@ export type BridgeHistoryRow = {
 
 export const BRIDGE_HISTORY_URL = "https://api.redbridge.test-hub.xyz/api/bridge-history";
 
-export function useBridgeHistory(pollMs = 15000) {
+export function useBridgeHistory(pollMs = 15000, limit?: number, offset = 0) {
   const [rows, setRows] = useState<BridgeHistoryRow[]>([]);
+  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | undefined>();
 
   const load = useCallback(async () => {
     try {
-      const response = await fetch(BRIDGE_HISTORY_URL);
+      const url = new URL(BRIDGE_HISTORY_URL);
+      if (limit !== undefined) {
+        url.searchParams.set("limit", String(limit));
+        url.searchParams.set("offset", String(offset));
+      }
+      const response = await fetch(url.toString());
       if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
-      const json = (await response.json()) as { results?: BridgeHistoryRow[] };
-      setRows(Array.isArray(json.results) ? json.results : []);
+      const json = (await response.json()) as { results?: BridgeHistoryRow[]; total?: number };
+      const results = Array.isArray(json.results) ? json.results : [];
+      setRows(results);
+      setTotal(typeof json.total === "number" ? json.total : results.length);
       setError(undefined);
     } catch {
       setError("Couldn't load bridge history right now.");
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [limit, offset]);
 
   useEffect(() => {
     void load();
@@ -48,5 +56,6 @@ export function useBridgeHistory(pollMs = 15000) {
     return () => window.clearInterval(interval);
   }, [load, pollMs]);
 
-  return { rows, loading, error, refresh: load };
+  return { rows, total, loading, error, refresh: load };
 }
+
