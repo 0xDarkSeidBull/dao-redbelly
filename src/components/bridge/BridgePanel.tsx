@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import ethLogo from "@/assets/eth-logo.png";
 import { StatusTimeline } from "@/components/bridge/StatusTimeline";
 import type { Transfer } from "@/hooks/useBridgeTransfers";
 import { useWallet } from "@/hooks/useWallet";
