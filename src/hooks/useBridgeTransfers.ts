@@ -49,8 +49,11 @@ function save(items: Transfer[]) {
   }
 }
 
-export function useBridgeTransfers() {
-  const [transfers, setTransfers] = useState<Transfer[]>([]);
+export function useBridgeTransfers(address?: string) {
+  const [allTransfers, setTransfers] = useState<Transfer[]>([]);
+  const transfers = address
+    ? allTransfers.filter((t) => t.sender?.toLowerCase() === address.toLowerCase())
+    : [];
   const transfersRef = useRef<Transfer[]>([]);
 
   useEffect(() => {
@@ -84,7 +87,11 @@ export function useBridgeTransfers() {
   /** Poll the WETHBridged contract for relayer approvals + execution. */
   const poll = useCallback(async () => {
     const pending = transfersRef.current.filter(
-      (t) => t.nonce !== undefined && !t.executed && t.status !== "failed",
+      (t) =>
+        t.nonce !== undefined &&
+        !t.executed &&
+        t.status !== "failed" &&
+        (!address || t.sender?.toLowerCase() === address.toLowerCase()),
     );
     if (pending.length === 0) return;
 
@@ -151,7 +158,7 @@ export function useBridgeTransfers() {
         /* transient RPC failure — retry on the next tick */
       }
     }
-  }, [updateTransfer]);
+  }, [updateTransfer, address]);
 
   useEffect(() => {
     void poll();

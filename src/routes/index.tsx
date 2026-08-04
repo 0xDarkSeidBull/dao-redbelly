@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
 
 function BridgePage() {
   const wallet = useWallet();
-  const { transfers, addTransfer, updateTransfer } = useBridgeTransfers();
+  const { transfers, addTransfer, updateTransfer } = useBridgeTransfers(wallet.address);
   const activeTransfer = transfers[0];
 
   return (
