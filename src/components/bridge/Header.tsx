@@ -2,7 +2,7 @@ import { AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ethLogo from "@/assets/eth-logo.png";
 import wethRbLogo from "@/assets/wethrb-logo.png";
-import redbridgeLogo from "@/assets/redbridgelogo.png.asset.json";
+
 import { REDBELLY_CHAIN_ID, SEPOLIA_CHAIN_ID, shorten } from "@/lib/bridge";
 
 const chainLabel = (chainId?: number) => {
