@@ -33,7 +33,7 @@ export function Header({
             <p className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
               <img src={ethLogo} alt="Ethereum" className="size-4 object-contain" />
               Sepolia ETH →
-              <img src={wethRbLogo} alt="WETH.rb" className="size-4 object-contain" />
+              <img src={wethRbLogo} alt="WETH.rb" className="h-4 w-4 object-contain" />
               Redbelly WETH.rb
             </p>
           </div>

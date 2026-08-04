@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import ethLogo from "@/assets/eth-logo.png";
+import wethRbLogo from "@/assets/wethrb-logo.png";
 import { StatusTimeline } from "@/components/bridge/StatusTimeline";
 import type { Transfer } from "@/hooks/useBridgeTransfers";
 import { useWallet } from "@/hooks/useWallet";
@@ -230,7 +231,9 @@ export function BridgePanel({
       <div className="space-y-6 p-6 sm:p-8">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-xl font-medium text-foreground">Bridge ETH to Redbelly</h1>
+            <h1 className="text-xl font-medium text-foreground">
+              Bridge Sepolia ETH to Redbelly Testnet
+            </h1>
             <p className="mt-1 text-sm text-muted-foreground">
               Lock ETH on Ethereum Sepolia and receive WETH.rb 1:1 on Redbelly Testnet.
             </p>
@@ -246,21 +249,29 @@ export function BridgePanel({
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-lg border border-border bg-background px-4 py-3">
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">Sepolia ETH</p>
-            <p className="mt-1 text-lg font-medium text-foreground">
-              {ethBalance !== undefined ? `${Number(formatEther(ethBalance)).toFixed(5)} ETH` : "-"}
-            </p>
+          <div className="flex items-center gap-3 rounded-lg border border-border bg-background px-4 py-3">
+            <img src={ethLogo} alt="" className="h-7 w-7 shrink-0 object-contain" />
+            <div>
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">Sepolia ETH</p>
+              <p className="mt-1 text-lg font-medium text-foreground">
+                {ethBalance !== undefined
+                  ? `${Number(formatEther(ethBalance)).toFixed(5)} ETH`
+                  : "-"}
+              </p>
+            </div>
           </div>
-          <div className="rounded-lg border border-border bg-background px-4 py-3">
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">
-              Redbelly WETH.rb
-            </p>
-            <p className="mt-1 text-lg font-medium text-foreground">
-              {wethBalance !== undefined
-                ? `${Number(formatEther(wethBalance)).toFixed(5)} WETH.rb`
-                : "-"}
-            </p>
+          <div className="flex items-center gap-3 rounded-lg border border-border bg-background px-4 py-3">
+            <img src={wethRbLogo} alt="" className="h-7 w-7 shrink-0 object-contain" />
+            <div>
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                Redbelly WETH.rb
+              </p>
+              <p className="mt-1 text-lg font-medium text-foreground">
+                {wethBalance !== undefined
+                  ? `${Number(formatEther(wethBalance)).toFixed(5)} WETH.rb`
+                  : "-"}
+              </p>
+            </div>
           </div>
         </div>
 

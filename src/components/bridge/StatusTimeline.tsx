@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { CheckCircle2, Circle, Loader2, ExternalLink } from "lucide-react";
 import type { Transfer } from "@/hooks/useBridgeTransfers";
 import { useBridgeHistory } from "@/hooks/useBridgeHistory";
@@ -9,6 +10,28 @@ function icon(state: StepState) {
   if (state === "done") return <CheckCircle2 className="size-5 text-success" />;
   if (state === "active") return <Loader2 className="size-5 animate-spin text-accent" />;
   return <Circle className="size-5 text-muted-foreground/50" />;
+}
+
+function formatElapsed(ms: number) {
+  const total = Math.max(0, Math.floor(ms / 1000));
+  const minutes = Math.floor(total / 60);
+  const seconds = total % 60;
+  return `${minutes}:${String(seconds).padStart(2, "0")}`;
+}
+
+function WaitingTimer({ startedAt }: { startedAt: number }) {
+  const [now, setNow] = useState(() => Date.now());
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  return (
+    <p className="mt-1 text-sm font-medium tabular-nums text-accent">
+      Waiting… {formatElapsed(now - startedAt)}
+    </p>
+  );
 }
 
 export function StatusTimeline({ transfer }: { transfer: Transfer }) {
@@ -24,7 +47,7 @@ export function StatusTimeline({ transfer }: { transfer: Transfer }) {
   const mintTx = row?.mint?.redbellyTxHash ?? transfer.mintTx;
   const minted = transfer.executed || Boolean(row?.mint) || row?.status === "minted";
 
-  const steps: { title: string; detail: string; state: StepState }[] = [
+  const steps: { title: string; detail: string; state: StepState; timer?: boolean }[] = [
     {
       title: "Locking on Sepolia",
       detail: transfer.sepoliaTx
@@ -36,6 +59,7 @@ export function StatusTimeline({ transfer }: { transfer: Transfer }) {
       title: "Waiting for relayer confirmations",
       detail: `2-of-3 signers required. ${approvals} of 2 approvals recorded on Redbelly.`,
       state: minted ? "done" : lockDone ? "active" : "todo",
+      timer: true,
     },
     {
       title: "WETH.rb minted on Redbelly Testnet",
@@ -68,6 +92,9 @@ export function StatusTimeline({ transfer }: { transfer: Transfer }) {
                 {step.title}
               </p>
               <p className="mt-0.5 text-sm text-muted-foreground">{step.detail}</p>
+              {step.timer && step.state === "active" ? (
+                <WaitingTimer startedAt={transfer.createdAt} />
+              ) : null}
             </div>
           </li>
         ))}
