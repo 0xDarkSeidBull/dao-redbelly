@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { ExternalLink } from "lucide-react";
+
 import { formatEther } from "viem";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
 import ethLogo from "@/assets/eth-logo.png";
 import wethRbLogo from "@/assets/wethrb-logo.png";
 import { useBridgeHistory, type BridgeHistoryRow } from "@/hooks/useBridgeHistory";
@@ -19,8 +23,14 @@ function StatusPill({ row }: { row: BridgeHistoryRow }) {
   );
 }
 
+const PAGE_SIZE = 10;
+
 export function HistoryTable() {
-  const { rows, loading, error } = useBridgeHistory();
+  const [offset, setOffset] = useState(0);
+  const { rows, total, loading, error } = useBridgeHistory(15000, PAGE_SIZE, offset);
+  const rangeStart = total === 0 ? 0 : offset + 1;
+  const rangeEnd = Math.min(offset + PAGE_SIZE, total);
+
 
   return (
     <Card className="border-border p-0 shadow-none">
@@ -104,6 +114,31 @@ export function HistoryTable() {
           </table>
         </div>
       )}
+
+      <div className="flex items-center justify-between gap-4 border-t border-border px-6 py-4">
+        <p className="text-sm text-muted-foreground">
+          Showing {rangeStart}-{rangeEnd} of {total}
+        </p>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={offset === 0}
+            onClick={() => setOffset((prev) => Math.max(0, prev - PAGE_SIZE))}
+          >
+            Previous
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={offset + PAGE_SIZE >= total}
+            onClick={() => setOffset((prev) => prev + PAGE_SIZE)}
+          >
+            Next
+          </Button>
+        </div>
+      </div>
     </Card>
+
   );
 }
