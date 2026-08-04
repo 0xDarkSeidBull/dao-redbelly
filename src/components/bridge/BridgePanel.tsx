@@ -125,6 +125,22 @@ export function BridgePanel({
     return undefined;
   }, [amount, amountWei, limits]);
 
+  const sliderRange = useMemo(() => {
+    if (!limits) return undefined;
+    const min = Number(formatEther(limits.min));
+    const max = Number(formatEther(limits.max));
+    if (!(max > min)) return undefined;
+    return { min, max, step: Number(((max - min) / 100).toFixed(9)) || 0.0001 };
+  }, [limits]);
+
+  const sliderValue = useMemo(() => {
+    if (!sliderRange) return 0;
+    const parsed = Number(amount);
+    if (!amount.trim() || !Number.isFinite(parsed)) return sliderRange.min;
+    return Math.min(Math.max(parsed, sliderRange.min), sliderRange.max);
+  }, [amount, sliderRange]);
+
+
   const recipientError =
     recipient.trim() && !isAddressLike(recipient) ? "Enter a valid EVM address (0x + 40 hex)." : undefined;
 
