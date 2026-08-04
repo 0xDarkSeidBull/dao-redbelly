@@ -10,7 +10,7 @@ import { LOCK_VAULT_ADDRESS, WETH_RB_ADDRESS, shorten } from "@/lib/bridge";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Redbridge, Sepolia ETH to Redbelly WETH.rb" },
+      { title: "Redbridge" },
       {
         name: "description",
         content:
