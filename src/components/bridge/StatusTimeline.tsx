@@ -47,7 +47,7 @@ export function StatusTimeline({ transfer }: { transfer: Transfer }) {
   const mintTx = row?.mint?.redbellyTxHash ?? transfer.mintTx;
   const minted = transfer.executed || Boolean(row?.mint) || row?.status === "minted";
 
-  const steps: { title: string; detail: string; state: StepState }[] = [
+  const steps: { title: string; detail: string; state: StepState; timer?: boolean }[] = [
     {
       title: "Locking on Sepolia",
       detail: transfer.sepoliaTx
@@ -59,6 +59,7 @@ export function StatusTimeline({ transfer }: { transfer: Transfer }) {
       title: "Waiting for relayer confirmations",
       detail: `2-of-3 signers required. ${approvals} of 2 approvals recorded on Redbelly.`,
       state: minted ? "done" : lockDone ? "active" : "todo",
+      timer: true,
     },
     {
       title: "WETH.rb minted on Redbelly Testnet",
@@ -91,6 +92,9 @@ export function StatusTimeline({ transfer }: { transfer: Transfer }) {
                 {step.title}
               </p>
               <p className="mt-0.5 text-sm text-muted-foreground">{step.detail}</p>
+              {step.timer && step.state === "active" ? (
+                <WaitingTimer startedAt={transfer.createdAt} />
+              ) : null}
             </div>
           </li>
         ))}
