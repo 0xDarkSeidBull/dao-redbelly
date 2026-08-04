@@ -28,7 +28,6 @@ export function Header({
     <header className="border-b border-border bg-background">
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-5">
         <div className="flex items-center gap-3">
-        <div className="flex items-center gap-3">
           <div>
             <p className="text-base font-medium leading-tight text-foreground">Redbridge</p>
             <p className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
