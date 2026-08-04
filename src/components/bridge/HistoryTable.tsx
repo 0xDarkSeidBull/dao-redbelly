@@ -19,8 +19,14 @@ function StatusPill({ row }: { row: BridgeHistoryRow }) {
   );
 }
 
+const PAGE_SIZE = 10;
+
 export function HistoryTable() {
-  const { rows, loading, error } = useBridgeHistory();
+  const [offset, setOffset] = useState(0);
+  const { rows, total, loading, error } = useBridgeHistory(15000, PAGE_SIZE, offset);
+  const rangeStart = total === 0 ? 0 : offset + 1;
+  const rangeEnd = Math.min(offset + PAGE_SIZE, total);
+
 
   return (
     <Card className="border-border p-0 shadow-none">
