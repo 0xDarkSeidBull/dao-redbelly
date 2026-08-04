@@ -1,5 +1,6 @@
 import { CheckCircle2, Circle, Loader2, ExternalLink } from "lucide-react";
 import type { Transfer } from "@/hooks/useBridgeTransfers";
+import { useBridgeHistory } from "@/hooks/useBridgeHistory";
 import { redbellyTxUrl, sepoliaTxUrl, shorten } from "@/lib/bridge";
 
 type StepState = "done" | "active" | "todo";
@@ -11,9 +12,17 @@ function icon(state: StepState) {
 }
 
 export function StatusTimeline({ transfer }: { transfer: Transfer }) {
+  const { rows } = useBridgeHistory();
+  const row =
+    transfer.nonce !== undefined
+      ? rows.find((item) => String(item.sourceNonce) === String(transfer.nonce))
+      : undefined;
+
+  const apiApprovals = row?.approvals ?? [];
   const lockDone = Boolean(transfer.sepoliaTx) && transfer.status !== "locking";
-  const approvals = transfer.approvals;
-  const minted = transfer.executed;
+  const approvals = Math.max(transfer.approvals, apiApprovals.length);
+  const mintTx = row?.mint?.redbellyTxHash ?? transfer.mintTx;
+  const minted = transfer.executed || Boolean(row?.mint) || row?.status === "minted";
 
   const steps: { title: string; detail: string; state: StepState }[] = [
     {
@@ -25,7 +34,7 @@ export function StatusTimeline({ transfer }: { transfer: Transfer }) {
     },
     {
       title: "Waiting for relayer confirmations",
-      detail: `2-of-3 signers required — ${approvals} of 2 approvals recorded on Redbelly.`,
+      detail: `2-of-3 signers required. ${approvals} of 2 approvals recorded on Redbelly.`,
       state: minted ? "done" : lockDone ? "active" : "todo",
     },
     {
@@ -64,7 +73,7 @@ export function StatusTimeline({ transfer }: { transfer: Transfer }) {
         ))}
       </ol>
 
-      <div className="flex flex-wrap gap-x-6 gap-y-2 border-t border-border pt-4 text-sm">
+      <div className="flex flex-col gap-2 border-t border-border pt-4 text-sm">
         {transfer.sepoliaTx ? (
           <a
             href={sepoliaTxUrl(transfer.sepoliaTx)}
@@ -76,14 +85,28 @@ export function StatusTimeline({ transfer }: { transfer: Transfer }) {
             <ExternalLink className="size-3.5" />
           </a>
         ) : null}
-        {transfer.mintTx ? (
+
+        {apiApprovals.map((approval, index) => (
           <a
-            href={redbellyTxUrl(transfer.mintTx)}
+            key={approval.redbellyTxHash ?? index}
+            href={redbellyTxUrl(approval.redbellyTxHash)}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-1 font-medium text-accent hover:underline"
           >
-            Redbelly mint tx {shorten(transfer.mintTx)}
+            Relayer approval {index + 1} of 2 tx {shorten(approval.redbellyTxHash)}
+            <ExternalLink className="size-3.5" />
+          </a>
+        ))}
+
+        {mintTx ? (
+          <a
+            href={redbellyTxUrl(mintTx)}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1 font-medium text-accent hover:underline"
+          >
+            Redbelly mint tx {shorten(mintTx)}
             <ExternalLink className="size-3.5" />
           </a>
         ) : null}

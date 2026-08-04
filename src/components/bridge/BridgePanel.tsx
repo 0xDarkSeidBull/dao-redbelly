@@ -231,7 +231,7 @@ export function BridgePanel({
           <div className="rounded-lg border border-border bg-background px-4 py-3">
             <p className="text-xs uppercase tracking-wide text-muted-foreground">Sepolia ETH</p>
             <p className="mt-1 text-lg font-medium text-foreground">
-              {ethBalance !== undefined ? `${Number(formatEther(ethBalance)).toFixed(5)} ETH` : "—"}
+              {ethBalance !== undefined ? `${Number(formatEther(ethBalance)).toFixed(5)} ETH` : "-"}
             </p>
           </div>
           <div className="rounded-lg border border-border bg-background px-4 py-3">
@@ -241,7 +241,7 @@ export function BridgePanel({
             <p className="mt-1 text-lg font-medium text-foreground">
               {wethBalance !== undefined
                 ? `${Number(formatEther(wethBalance)).toFixed(5)} WETH.rb`
-                : "—"}
+                : "-"}
             </p>
           </div>
         </div>
@@ -251,7 +251,7 @@ export function BridgePanel({
             <Label htmlFor="amount">Amount to bridge</Label>
             <span className="text-xs text-muted-foreground">
               {limits
-                ? `Limits ${formatEther(limits.min)} – ${formatEther(limits.max)} ETH`
+                ? `Limits ${formatEther(limits.min)} to ${formatEther(limits.max)} ETH`
                 : "Loading limits…"}
             </span>
           </div>

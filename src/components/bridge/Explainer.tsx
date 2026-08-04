@@ -9,7 +9,7 @@ const steps = [
   },
   {
     title: "Relayer watches the lock event",
-    body: "An independent off-chain relayer process observes the Locked event on Ethereum Sepolia. This app does not mint anything itself — it only reads on-chain state.",
+    body: "An independent off-chain relayer process observes the Locked event on Ethereum Sepolia. This app does not mint anything itself, it only reads on-chain state.",
   },
   {
     title: "2 of 3 signers approve on Redbelly",

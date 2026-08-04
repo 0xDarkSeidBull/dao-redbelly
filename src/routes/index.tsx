@@ -10,13 +10,13 @@ import { LOCK_VAULT_ADDRESS, WETH_RB_ADDRESS, shorten } from "@/lib/bridge";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "RB Bridge — Sepolia ETH to Redbelly WETH.rb" },
+      { title: "RB Bridge, Sepolia ETH to Redbelly WETH.rb" },
       {
         name: "description",
         content:
           "Lock ETH on Ethereum Sepolia and receive wrapped WETH.rb 1:1 on Redbelly Testnet through a 2-of-3 relayer bridge.",
       },
-      { property: "og:title", content: "RB Bridge — Sepolia ETH to Redbelly WETH.rb" },
+      { property: "og:title", content: "RB Bridge, Sepolia ETH to Redbelly WETH.rb" },
       {
         property: "og:description",
         content:
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
 
 function BridgePage() {
   const wallet = useWallet();
-  const { transfers, addTransfer, updateTransfer, clearHistory } = useBridgeTransfers();
+  const { transfers, addTransfer, updateTransfer } = useBridgeTransfers();
   const activeTransfer = transfers[0];
 
   return (
@@ -61,7 +61,7 @@ function BridgePage() {
 
         <Explainer />
 
-        <HistoryTable transfers={transfers} onClear={clearHistory} />
+        <HistoryTable />
 
         <footer className="grid gap-2 border-t border-border pt-6 text-xs text-muted-foreground sm:grid-cols-2">
           <p>
@@ -78,7 +78,7 @@ function BridgePage() {
           <p className="sm:text-right">
             WETHBridged ·{" "}
             <a
-              href={`https://explorer.testnet.redbelly.network/address/${WETH_RB_ADDRESS}`}
+              href={`https://redbelly.testnet.routescan.io/address/${WETH_RB_ADDRESS}`}
               target="_blank"
               rel="noreferrer"
               className="font-medium text-accent hover:underline"

@@ -11,7 +11,7 @@ export const SEPOLIA_RPC = "https://ethereum-sepolia-rpc.publicnode.com";
 export const REDBELLY_RPC = "https://governors.testnet.redbelly.network";
 
 export const SEPOLIA_EXPLORER = "https://sepolia.etherscan.io";
-export const REDBELLY_EXPLORER = "https://explorer.testnet.redbelly.network";
+export const REDBELLY_EXPLORER = "https://redbelly.testnet.routescan.io";
 
 export const sepoliaChain = defineChain({
   ...viemSepolia,

@@ -69,7 +69,7 @@ export function WarningBanner() {
         <p className="text-sm leading-relaxed text-warning-foreground">
           <span className="font-medium text-foreground">This is a testnet demo.</span> Do not send
           real funds. ETH locked on Sepolia is only recoverable by the contract owner via emergency
-          withdrawal — there is no user-initiated unlock.
+          withdrawal. There is no user-initiated unlock.
         </p>
       </div>
     </div>
