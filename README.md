@@ -1,4 +1,5 @@
 <div align="center">
+<img width="1800" height="1293" alt="rblogo" src="https://github.com/user-attachments/assets/43218746-bad0-46a0-939b-ec877fed2da4" />
 
 # 🌉 Redbridge
 
