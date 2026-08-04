@@ -56,7 +56,10 @@ export function HistoryTable() {
                   className="border-b border-border last:border-b-0"
                 >
                   <td className="whitespace-nowrap px-6 py-4 font-medium text-foreground">
-                    {formatEther(BigInt(row.amountWei))} ETH
+                    <span className="inline-flex items-center gap-2">
+                      <img src={ethLogo} alt="" className="size-4 object-contain" />
+                      {formatEther(BigInt(row.amountWei))} ETH
+                    </span>
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-muted-foreground">
                     {shorten(row.recipient)}
