@@ -16,7 +16,7 @@ export const Route = createFileRoute("/")({
         content:
           "Lock ETH on Ethereum Sepolia and receive wrapped WETH.rb 1:1 on Redbelly Testnet through a 2-of-3 relayer bridge.",
       },
-      { property: "og:title", content: "Redbridge, Sepolia ETH to Redbelly WETH.rb" },
+      { property: "og:title", content: "Redbridge" },
       {
         property: "og:description",
         content:
