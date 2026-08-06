@@ -1,0 +1,48 @@
+{
+  "chain": {
+    "name": "Redbelly Network",
+    "defillama_chain_key": "rbn",
+    "chain_id": 151,
+    "rpc": "https://governors.mainnet.redbelly.network",
+    "explorer_mainnet": "https://redbelly.routescan.io",
+    "explorer_testnet": "https://redbelly.testnet.routescan.io",
+    "_source": "Verified directly from @defillama/sdk v5.0.220 providers.json (DefiLlama's own chain config) and the TASK-11 Infrastructure/Resources list."
+  },
+  "already_listed_reference": {
+    "_note": "reddex is Redbelly's existing DEX, already tracked on DefiLlama. Included here only as a verified reference example for the adapter pattern — not a new submission.",
+    "protocol_slug": "reddex",
+    "category": "Dexs",
+    "sub_category": "AMM",
+    "factory_rbn": "0x262E06314Af8f4EEd70dbd8C7EFe2a5De686C142",
+    "factory_ethereum": "0xBC7D212939FBe696e514226F3FAfA3697B96Bf59",
+    "factory_bsc": "0x6D642253B6fD96d9D155279b57B8039675E49D8e",
+    "staking_rbn": [
+      ["0x634579156A20C50d0c3525233b1C39AAF500F867", "0x43A1dc107BBb06dF266278056055AE7Fc5bd2817", "0x5E8040e85D0E6363D798a43BEa939C026449946d"],
+      ["0x0233971bd2de29e81029336c46997055df3b5282", "0x0000000000000000000000000000000000000000"]
+    ],
+    "current_tvl_snapshot_usd": 21895.03,
+    "snapshot_note": "Point-in-time figure observed on defillama.com/protocol/reddex during kit preparation; will have drifted by the time this is read. Pull live figures from the DefiLlama API endpoint below rather than trusting this number.",
+    "_source": "registries/uniswapV2.js in github.com/DefiLlama/DefiLlama-Adapters (verified by cloning the repo directly), cross-checked against the live defillama.com/protocol/reddex page."
+  },
+  "new_protocol_template": {
+    "_note": "Fill this in for any NEW Redbelly-native protocol before submitting a PR to DefiLlama-Adapters. Delete fields that don't apply.",
+    "protocol_slug": "REPLACE_ME",
+    "category": "REPLACE_ME (e.g. Dexs, Lending, Yield)",
+    "factory_rbn": "REPLACE_ME",
+    "staking_rbn": [],
+    "deployer_address": "REPLACE_ME",
+    "deployment_tx": "REPLACE_ME",
+    "audit_link": "REPLACE_ME (optional but strengthens the PR)"
+  },
+  "defillama_api_endpoints": {
+    "base_url": "https://api.llama.fi",
+    "chain_historical_tvl": "/v2/historicalChainTvl/Redbelly",
+    "chain_tvl_chart": "/charts/Redbelly",
+    "protocol_detail": "/protocol/{protocol_slug}",
+    "protocol_current_tvl": "/tvl/{protocol_slug}",
+    "all_protocols": "/protocols",
+    "price_base_url": "https://coins.llama.fi",
+    "price_current": "/prices/current/{chain}:{address}",
+    "_source": "Free-tier api.llama.fi routes, cross-verified against three independent third-party API wrappers (github.com/Hati0x/defillama-api, defillama-curl docs, github.com/slurpxbt/defillama_library) that all document the same paths. No API key required for these routes. Price route lives on the separate coins.llama.fi host, not api.llama.fi -- caught as a 404 during live verification (see docs/TESTING.md)."
+  }
+}
