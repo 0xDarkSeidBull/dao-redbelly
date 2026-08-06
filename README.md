@@ -344,8 +344,12 @@ Whether major cross-chain protocols currently support Redbelly Network natively 
 
 **Beyond the original task list**, two integrations are more directly relevant:
 
+**Beyond the original task list**, four integrations are more directly relevant:
+
 - **Celer's cBridge** added Redbelly Network support in August 2025  bridges tokens between Ethereum, BNB Chain, and Redbelly.
-- **Redbelly's own official bridge** ([reddex.io/bridge](https://www.reddex.io/bridge)) is live on mainnet for Redbelly ⇄ BNB Chain  the path the Redbelly team itself points users to for bridging USDC/USDT.
+- **Redbelly's own official bridge** ([reddex.io/bridge](https://www.reddex.io/bridge))  Redbelly's own X account has directly pointed users to reddex for bridging USDC/USDT into the network, describing it as their official and exclusive DEX.
+- **Lucid Labs Bridge**  Redbelly's own developer docs explicitly recommend this for the return path: "To bring RBNT from a non-Redbelly chain to Redbelly, use Lucid Labs Bridge." It also has a built-in "Resend Transaction" feature for retrying a bridge transfer that gets stuck mid-relay, without needing to contact support first.
+- **Router Protocol's Nitro** and **Polymer**  not general bridges you'd pick yourself, but they're the infrastructure Redbelly's own announcements credit for the existing wrapped-RBNT deployments: Nitro powers the Solana wrapped-RBNT bridge, Polymer powers the Ethereum one.
 
 This repo's bridge demonstrates the minimal architecture needed for a Redbelly integration when a protocol has no native support: a source-chain lock contract, a destination-chain mint contract with multisig-gated minting, and an off-chain relayer network connecting the two. Since LayerZero is confirmed live on Redbelly Mainnet, it could in principle replace this repo's custom relayer with its own DVN/Executor infrastructure while keeping a similar lock-and-mint pattern  the natural next iteration for a mainnet deployment.
 
