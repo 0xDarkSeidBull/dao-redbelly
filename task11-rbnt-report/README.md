@@ -1,4 +1,5 @@
 # TASK-11  RBNT Token Utility and Ecosystem Visibility Report
+<img width="2880" height="1606" alt="task11logo" src="https://github.com/user-attachments/assets/0429da39-0ab1-47be-b2bb-1f5d4677c046" />
 
 Submitted deliverable for the Redbelly DAO Task Board. Four parts, every figure traced to a primary source  official whitepaper, live on-chain data, or the platform's own docs.
 
