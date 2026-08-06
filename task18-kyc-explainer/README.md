@@ -1,4 +1,5 @@
-# TASK-18 — KYC and Wallet Activation Explainer
+# TASK-18KYC and Wallet Activation Explainer
+<img width="396" height="361" alt="task18logo" src="https://github.com/user-attachments/assets/5a1c598e-7543-4f54-9e78-348c3fc163d9" />
 
 A single-page explainer resolving five recurring points of KYC confusion for Redbelly Network: when KYC is required, the ten-wallet-per-identity limit, typical approval wait time, current regional restrictions, and KYC as a staking prerequisite.
 
@@ -12,7 +13,7 @@ A single-page explainer resolving five recurring points of KYC confusion for Red
 
 ## Sourcing summary
 
-Three of five points are cited to an official Redbelly source (mainnet-vs-wrapped KYC requirement, current restricted-jurisdiction list, KYC-for-staking). Two points (ten-wallet limit, 3 to 5 minute approval time) were verified firsthand by the contributor directly and confirmed by a Redbelly moderator in the Discord support channel. They are marked `[MOD-VERIFIED, DISCORD — NO PUBLISHED DOC]` throughout, since no published official document states either figure.
+Three of five points are cited to an official Redbelly source (mainnet-vs-wrapped KYC requirement, current restricted-jurisdiction list, KYC-for-staking). Two points (ten-wallet limit, 3 to 5 minute approval time) were verified firsthand by the contributor directly and confirmed by a Redbelly moderator in the Discord support channel. They are marked `[MOD-VERIFIED, DISCORDNO PUBLISHED DOC]` throughout, since no published official document states either figure.
 
 One discrepancy against the task brief is flagged rather than silently corrected: the brief assumes regional restrictions have been removed. Redbelly's live Terms and Conditions (Clause 15) still list 18 restricted jurisdictions with no indication of a reduction from a prior list. The deliverable states the current list as verified fact and does not repeat the removal claim, since no source for it was found.
 
