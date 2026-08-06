@@ -1,4 +1,6 @@
 # Unstick Your RBNT: A Cross Chain Recovery Playbook
+<img width="1800" height="1004" alt="task16logo" src="https://github.com/user-attachments/assets/afb51b6d-0c45-4488-b9f3-16dad602a61c" />
+
 
 A community support guide for the four most common ways RBNT gets stuck: wrong network CEX deposits, wrapped RBNT showing zero value, quote unavailable errors bridging back to Redbelly Network, and stranded stablecoin transfers.
 
