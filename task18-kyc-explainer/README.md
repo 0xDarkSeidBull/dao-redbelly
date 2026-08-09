@@ -1,5 +1,5 @@
 # TASK-18KYC and Wallet Activation Explainer
-<img width="396" height="361" alt="task18logo" src="https://github.com/user-attachments/assets/5a1c598e-7543-4f54-9e78-348c3fc163d9" />
+<img width="1434" height="1024" alt="dao-logo-on-dark" src="https://github.com/user-attachments/assets/3a5afc16-6494-4aeb-9ccf-28e2a450a50f" />
 
 A single-page explainer resolving five recurring points of KYC confusion for Redbelly Network: when KYC is required, the ten-wallet-per-identity limit, typical approval wait time, current regional restrictions, and KYC as a staking prerequisite.
 
