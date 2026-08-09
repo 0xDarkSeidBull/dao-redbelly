@@ -1,5 +1,5 @@
 <div align="center">
-<img width="1800" height="1293" alt="rblogo" src="https://github.com/user-attachments/assets/43218746-bad0-46a0-939b-ec877fed2da4" />
+<img width="1434" height="1024" alt="dao-logo-on-dark" src="https://github.com/user-attachments/assets/76709542-59a1-4344-8fe4-6662d1fcf2ac" />
 
 # 🌉 Redbridge
 
