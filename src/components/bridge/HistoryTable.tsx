@@ -8,7 +8,13 @@ import { Button } from "@/components/ui/button";
 import ethLogo from "@/assets/eth-logo.png";
 import wethRbLogo from "@/assets/wethrb-logo.png";
 import { useBridgeHistory, type BridgeHistoryRow } from "@/hooks/useBridgeHistory";
+import {
+  SupportTicketDialog,
+  type SupportTicketPrefill,
+} from "@/components/bridge/SupportTicketDialog";
 import { redbellyTxUrl, sepoliaTxUrl, shorten } from "@/lib/bridge";
+
+const STUCK_AFTER_MS = 5 * 60 * 1000;
 
 function StatusPill({ row }: { row: BridgeHistoryRow }) {
   const minted = row.status === "minted" || Boolean(row.mint);
@@ -27,6 +33,7 @@ const PAGE_SIZE = 10;
 
 export function HistoryTable() {
   const [offset, setOffset] = useState(0);
+  const [ticket, setTicket] = useState<SupportTicketPrefill | undefined>();
   const { rows, total, loading, error } = useBridgeHistory(15000, PAGE_SIZE, offset);
   const rangeStart = total === 0 ? 0 : offset + 1;
   const rangeEnd = Math.min(offset + PAGE_SIZE, total);
