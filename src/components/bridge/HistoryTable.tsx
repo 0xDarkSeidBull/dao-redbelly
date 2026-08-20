@@ -98,6 +98,24 @@ export function HistoryTable() {
                   </td>
                   <td className="whitespace-nowrap px-6 py-4">
                     <StatusPill row={row} />
+                    {!row.mint &&
+                    row.status !== "minted" &&
+                    Date.now() - row.lockedAt > STUCK_AFTER_MS ? (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setTicket({
+                            txHash: row.sepoliaTxHash,
+                            walletAddress: row.sender,
+                            amount: formatEther(BigInt(row.amountWei)),
+                          })
+                        }
+                        className="mt-2 flex items-center gap-1.5 text-xs font-medium text-[#EF5350] hover:underline"
+                      >
+                        <span className="size-1.5 rounded-full bg-[#EF5350]" />
+                        Pending manual review, contact support
+                      </button>
+                    ) : null}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4">
                     {row.mint?.redbellyTxHash ? (
