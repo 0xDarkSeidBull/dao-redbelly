@@ -163,7 +163,17 @@ export function HistoryTable() {
           </Button>
         </div>
       </div>
-    </Card>
 
+      {ticket ? (
+        <SupportTicketDialog
+          key={ticket.txHash}
+          open
+          onOpenChange={(next) => {
+            if (!next) setTicket(undefined);
+          }}
+          prefill={ticket}
+        />
+      ) : null}
+    </Card>
   );
 }
