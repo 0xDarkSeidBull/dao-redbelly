@@ -142,6 +142,26 @@ export function BridgePanel({
   }, [amount, sliderRange]);
 
 
+  const maxSpendable = useMemo(() => {
+    if (ethBalance === undefined) return undefined;
+    return Number(formatEther(ethBalance)) * 0.9;
+  }, [ethBalance]);
+
+  const [gasNote, setGasNote] = useState(false);
+
+  const handleAmountBlur = () => {
+    setGasNote(false);
+    const parsed = Number(amount);
+    if (!amount.trim() || !Number.isFinite(parsed) || parsed <= 0) return;
+    let next = parsed;
+    if (next < 0.001) next = 0.001;
+    if (maxSpendable !== undefined && next > maxSpendable) {
+      next = Number(maxSpendable.toFixed(6));
+      setGasNote(true);
+    }
+    if (next !== parsed) setAmount(String(next));
+  };
+
   const recipientError =
     recipient.trim() && !isAddressLike(recipient) ? "Enter a valid EVM address (0x + 40 hex)." : undefined;
 
