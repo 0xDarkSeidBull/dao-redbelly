@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BridgePanel } from "@/components/bridge/BridgePanel";
 import { Explainer } from "@/components/bridge/Explainer";
+import { FaucetLinks } from "@/components/bridge/FaucetLinks";
+import { FooterLinks } from "@/components/bridge/FooterLinks";
 import { Header, WarningBanner } from "@/components/bridge/Header";
 import { HistoryTable } from "@/components/bridge/HistoryTable";
 import { useBridgeTransfers } from "@/hooks/useBridgeTransfers";
@@ -52,6 +54,8 @@ function BridgePage() {
           </p>
         ) : null}
 
+        <FaucetLinks />
+
         <BridgePanel
           wallet={wallet}
           {...(activeTransfer ? { activeTransfer } : {})}
@@ -63,7 +67,8 @@ function BridgePage() {
 
         <HistoryTable />
 
-        <footer className="space-y-3 border-t border-border pt-6 text-xs text-muted-foreground">
+        <footer className="space-y-5 border-t border-border pt-6 text-xs text-muted-foreground">
+          <FooterLinks />
           <div className="grid gap-2 sm:grid-cols-2">
             <p>
               SepoliaLockVault ·{" "}

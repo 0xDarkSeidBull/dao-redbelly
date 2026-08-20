@@ -142,6 +142,26 @@ export function BridgePanel({
   }, [amount, sliderRange]);
 
 
+  const maxSpendable = useMemo(() => {
+    if (ethBalance === undefined) return undefined;
+    return Number(formatEther(ethBalance)) * 0.9;
+  }, [ethBalance]);
+
+  const [gasNote, setGasNote] = useState(false);
+
+  const handleAmountBlur = () => {
+    setGasNote(false);
+    const parsed = Number(amount);
+    if (!amount.trim() || !Number.isFinite(parsed) || parsed <= 0) return;
+    let next = parsed;
+    if (next < 0.001) next = 0.001;
+    if (maxSpendable !== undefined && next > maxSpendable) {
+      next = Number(maxSpendable.toFixed(6));
+      setGasNote(true);
+    }
+    if (next !== parsed) setAmount(String(next));
+  };
+
   const recipientError =
     recipient.trim() && !isAddressLike(recipient) ? "Enter a valid EVM address (0x + 40 hex)." : undefined;
 
@@ -292,8 +312,18 @@ export function BridgePanel({
               value={amount}
               onChange={(event) => {
                 const next = event.target.value;
-                if (next === "" || /^\d*\.?\d*$/.test(next)) setAmount(next);
+                if (next === "" || /^\d*\.?\d*$/.test(next)) {
+                  setGasNote(false);
+                  setAmount(next);
+                }
               }}
+              onKeyDown={(event) => {
+                if (event.key.length === 1 && !event.ctrlKey && !event.metaKey) {
+                  if (!/[\d.]/.test(event.key)) event.preventDefault();
+                  else if (event.key === "." && amount.includes(".")) event.preventDefault();
+                }
+              }}
+              onBlur={handleAmountBlur}
               className="h-12 border-input bg-background pr-20 text-base placeholder:text-muted-foreground focus-visible:border-accent"
             />
             <span className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center gap-1.5 text-sm font-medium text-muted-foreground">
@@ -317,6 +347,14 @@ export function BridgePanel({
                 <span>{sliderRange.max} ETH</span>
               </div>
             </div>
+          ) : null}
+          {maxSpendable !== undefined ? (
+            <p className="text-xs text-muted-foreground">
+              Max: {maxSpendable.toFixed(3)} ETH (10% reserved for gas)
+            </p>
+          ) : null}
+          {gasNote ? (
+            <p className="text-sm text-accent">Reduced to leave room for gas fees.</p>
           ) : null}
           {amountError ? <p className="text-sm text-accent">{amountError}</p> : null}
         </div>
