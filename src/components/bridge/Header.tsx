@@ -30,9 +30,9 @@ export function Header({
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-5">
         <div className="flex items-center gap-3">
           <img
-            src="/rblogo.png"
-            alt="Redbridge logo"
-            className="h-12 w-auto shrink-0 self-center object-contain sm:h-22"
+            src="/dao-logo-on-dark.png"
+            alt="Redbelly DAO"
+            className="h-9 w-auto shrink-0 self-center object-contain"
           />
           <div>
             <p className="text-base font-medium leading-tight text-foreground">Redbridge</p>
